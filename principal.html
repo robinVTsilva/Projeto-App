@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title> Projeto App </title>
+        
+        <script type="text/javascript">
+        alunos = [];
+            cadastrar = function() {  
+                var alunoFld = document.getElementById("alunoField"),
+                    notaFld = document.getElementById("notaField");  
+
+                alunos.push({nome: alunoFld.value, nota: notaFld.value});  
+                alunoFld.value = notaFld.value = "";  alert("Aluno cadastrado com sucesso!");  
+                alunoFld.focus();};
+
+            listar = function() {  
+                var obj = document.getElementById("listaDiv");    
+                obj.innerHTML = "";    for(var i = 0; i < alunos.length; i++) {	obj.innerHTML += "id: " + i + "<br />";	
+                obj.innerHTML += "Nome: " + alunos[i].nome + "<br />";	obj.innerHTML += "Nota: " + alunos[i].nota + "<br />";	
+                obj.innerHTML += "<br />";  }};
+
+            </script>
+            </head>
+            <body>
+                <form action="" method="post" id="form_prepare">
+                        <fieldset>
+                            <label>Aluno: <input id="alunoField" type="text" name="nome" /></label>
+                            <label>Nota: <input id="notaField" type="text" name="nota" /></label>
+                    
+                            <label><input type="button" onclick="cadastrar()" value="Cadastrar" /></label>
+                            <label><input type="button" onclick="listar()" value="Listar" /></label>
+                        </fieldset>
+                </form>
+                <div id="listaDiv"></div>
+            </body>
+</html>
