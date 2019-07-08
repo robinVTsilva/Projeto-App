@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <link href="./style.css" rel="stylesheet">
+        <title> Projeto App </title>
+        
+        <script type="text/javascript">
+        alunos = [];
+            cadastrar = function() {  
+                var alunoFld = document.getElementById("alunoField"),
+                    notaFld = document.getElementById("notaField");  
+
+                alunos.push({nome: alunoFld.value, nota: notaFld.value});  
+                alunoFld.value = notaFld.value = "";  alert("Aluno cadastrado com sucesso!");  
+                alunoFld.focus();};
+
+            listar = function() {  
+                var obj = document.getElementById("listaDiv");    
+                obj.innerHTML = "";    for(var i = 1; i < alunos.length; i++) {
+                obj.innerHTML += 
+                "<tr>" +
+                "<td>id</td>" +
+                "<td>nome</td>" +
+                "<td>nota </td>" +
+                "</tr>" +
+                "<tr>" +
+                "<td>" + i + "</td>" +
+                "<td>" + alunos[i].nome + "</td>" +
+                "<td>" + alunos[i].nota + "</td>" +
+                "</td>";
+                obj.innerHTML += "<label><input id'" + i + "' type='button' onclick='excluir()' value='Excluir' /></label>"
+                obj.innerHTML += "<br />";
+                obj.innerHTML += "<br />";
+                    }
+                };
+
+            excluir = function() {
+
+                console.log("banana");
+            }
+
+            </script>
+            </head>
+            <body>
+                <form action="" method="post" id="form_prepare">
+                        <fieldset>
+                            <label>Aluno: <input id="alunoField" type="text" name="nome" /></label>
+                            <label>Nota: <input id="notaField" type="text" name="nota" /></label>
+                    
+                            <label><input type="button" onclick="cadastrar()" value="Cadastrar" /></label>
+                            <label><input type="button" onclick="listar()" value="Listar" /></label>
+                        </fieldset>
+                </form>
+                <div>
+                    <table id="listaDiv" border="1"></table>
+                </div>
+            </body>
+</html>
