@@ -1,35 +1,71 @@
 <html>
-    <head>
-        <title> Projeto App </title>
-        
-        <script type="text/javascript">
+
+<head>
+    <link href="./style.css" rel="stylesheet">
+    <title> Projeto App </title>
+
+    <script type="text/javascript">
         alunos = [];
-            cadastrar = function() {  
-                var alunoFld = document.getElementById("alunoField"),
-                    notaFld = document.getElementById("notaField");  
+        cadastrar = function () {
+            var alunoFld = document.getElementById("alunoField"),
+                notaFld = document.getElementById("notaField");
 
-                alunos.push({nome: alunoFld.value, nota: notaFld.value});  
-                alunoFld.value = notaFld.value = "";  alert("Aluno cadastrado com sucesso!");  
-                alunoFld.focus();};
+            alunos.push({ nome: alunoFld.value, nota: notaFld.value });
+            alunoFld.value = notaFld.value = ""; 
+            console.log("Aluno cadastrado com sucesso!");
+            alunoFld.focus();
+        };
 
-            listar = function() {  
-                var obj = document.getElementById("listaDiv");    
-                obj.innerHTML = "";    for(var i = 0; i < alunos.length; i++) {	obj.innerHTML += "id: " + i + "<br />";	
-                obj.innerHTML += "Nome: " + alunos[i].nome + "<br />";	obj.innerHTML += "Nota: " + alunos[i].nota + "<br />";	
-                obj.innerHTML += "<br />";  }};
+        listar = function () {
+            var bodyTable = document.getElementById("listaTBody");
+            bodyTable.innerHTML = "";
 
-            </script>
-            </head>
-            <body>
-                <form action="" method="post" id="form_prepare">
-                        <fieldset>
-                            <label>Aluno: <input id="alunoField" type="text" name="nome" /></label>
-                            <label>Nota: <input id="notaField" type="text" name="nota" /></label>
-                    
-                            <label><input type="button" onclick="cadastrar()" value="Cadastrar" /></label>
-                            <label><input type="button" onclick="listar()" value="Listar" /></label>
-                        </fieldset>
-                </form>
-                <div id="listaDiv"></div>
-            </body>
+            for (var i = 0; i < alunos.length; i++) {
+
+                bodyTable.innerHTML +=
+                    "<tr id ='" + i + "'>" +
+                    "<td>" + i + "</td>" +
+                    "<td>" + alunos[i].nome + "</td>" +
+                    "<td>" + alunos[i].nota + "</td>" +
+                    "<td><a href='#' onclick='excluir(event,"+ i +")'/>EXCLUIR</a>" +
+                    "</tr>";
+            }
+        };
+
+        excluir = function (event,i) {
+//            console.log(event.target.parentElement.parentElement);
+            alunos.splice(i, 1)
+            listar();
+        }
+
+    </script>
+</head>
+
+<body>
+    <form action="" method="post" id="form_prepare">
+        <fieldset>
+            <label>Aluno: <input id="alunoField" type="text" name="nome" /></label>
+            <label>Nota: <input id="notaField" type="text" name="nota" /></label>
+
+            <label><input type="button" onclick="cadastrar()" value="Cadastrar" /></label>
+            <label><input type="button" onclick="listar()" value="Listar" /></label>
+        </fieldset>
+    </form>
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>nome</th>
+                    <th>nota</th>
+                    <th>excluir</th>
+                </tr>
+            </thead>
+            <tbody id="listaTBody">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
 </html>
