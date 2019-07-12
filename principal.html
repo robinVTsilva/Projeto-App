@@ -5,7 +5,8 @@
     <title> Projeto App </title>
 
     <script type="text/javascript">
-        alunos = [];
+
+        alunos = JSON.parse(localStorage.getItem('la')) || [];
         cadastrar = function () {
             var alunoFld = document.getElementById("alunoField"),
                 notaFld = document.getElementById("notaField");
@@ -15,6 +16,7 @@
             console.log("Aluno cadastrado com sucesso!");
             alunoFld.focus();
             listar();
+            salvar();
         };
 
         listar = function () {
@@ -28,7 +30,7 @@
                     "<td>" + i + "</td>" +
                     "<td>" + alunos[i].nome + "</td>" +
                     "<td>" + alunos[i].nota + "</td>" +
-                    "<td><a href='#' onclick='excluir(event,"+ i +")'/>EXCLUIR</a>" +
+                    "<td><a href='#' onclick='excluir(event,"+ i +")'/>EXCLUIR // EDITAR</a>" +
                     "</tr>";
             }
         };
@@ -37,9 +39,15 @@
 //            console.log(event.target.parentElement.parentElement);
             alunos.splice(i, 1)
             listar();
+            salvar();
         }
 
-    </script>
+        salvar = function() {
+            localStorage.setItem('la', JSON.stringify(alunos))
+        }
+
+        window.onload = listar;
+          </script>
 </head>
 
 <body>
@@ -59,7 +67,7 @@
                     <th>id</th>
                     <th>nome</th>
                     <th>nota</th>
-                    <th>excluir</th>
+                    <th>excluir // editar</th>
                 </tr>
             </thead>
             <tbody id="listaTBody">
